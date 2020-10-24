@@ -47,7 +47,7 @@ namespace Cyphered
             rng = new Random(key);
             encryptMatrix = new Dictionary<char, char>();
             decryptMatrix = new Dictionary<char, char>();
-            outputDirectory = Directory.CreateDirectory(Directory.GetCurrentDirectory() + $"\\sessions\\{DateTime.Now:dd/MM/yyyy}_{DateTime.Now:HH/mm/ss}").Name;
+            outputDirectory = Directory.CreateDirectory(Directory.GetCurrentDirectory() + $"\\sessions\\{DateTime.Now.ToString().Replace("/", "").Replace(" ", "_").Replace(":", "")}").FullName;
             encryptCounter = 0;
             decryptCounter = 0;
 

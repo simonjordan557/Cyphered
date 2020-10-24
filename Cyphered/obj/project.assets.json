@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\Cyphered\\Cyphered\\Cyphered.csproj",
+      "projectUniqueName": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\My Programs\\Cyphered\\Cyphered\\Cyphered.csproj",
       "projectName": "Cyphered",
-      "projectPath": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\Cyphered\\Cyphered\\Cyphered.csproj",
+      "projectPath": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\My Programs\\Cyphered\\Cyphered\\Cyphered.csproj",
       "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-      "outputPath": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\Cyphered\\Cyphered\\obj\\",
+      "outputPath": "L:\\Backup 19.1.18\\Gamedev\\Visual Studio 2019\\My Programs\\Cyphered\\Cyphered\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",

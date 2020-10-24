@@ -61,7 +61,7 @@ namespace Cyphered
                         if (personnelReference.currentUser == null)
                         {
                             Console.WriteLine("No users are currently logged in.");
-                            Thread.Sleep(2000);
+                            Thread.Sleep(Helper.threadSleep);
                             currentMenu();
                         }
 
@@ -98,7 +98,7 @@ namespace Cyphered
                 default:
                     {
                         Console.WriteLine("Invalid response.");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(Helper.threadSleep);
                         currentMenu();
                         break;
                     }
@@ -183,7 +183,7 @@ namespace Cyphered
                 default:
                     {
                         Console.WriteLine("Invalid response.");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(Helper.threadSleep);
                         currentMenu();
                         break;
                     }
@@ -245,16 +245,16 @@ namespace Cyphered
                     {
                         Console.WriteLine("Confirm your login details: ");
                         List<User> currentUserAsList = new List<User>() { personnelReference.currentUser };
-                        Thread.Sleep(2000);
+                        Thread.Sleep(Helper.threadSleep);
                         User checkedUser = Helper.GetAndValidateLogin(currentUserAsList);
                         if (checkedUser.Equals(personnelReference.currentUser))
                         {
                             Console.WriteLine(personnelReference.currentUser.Cipher.ToString());
-                            System.Timers.Timer timer = new System.Timers.Timer(30000);
+                            System.Timers.Timer timer = new System.Timers.Timer(Helper.timeout);
                             timer.Start();
                             timer.Elapsed += Timer_Elapsed;
                             
-                            Console.WriteLine($"\nSCREEN WILL CLEAR AFTER 30 SECONDS.");
+                            Console.WriteLine($"\nSCREEN WILL CLEAR AFTER {Helper.timeout / 1000} SECONDS.");
                             Console.ReadLine();
                             timer.Stop();
                             currentMenu();
@@ -263,7 +263,7 @@ namespace Cyphered
                         else
                         {
                             Console.WriteLine("As login was not authenticated, logging out.");
-                            Thread.Sleep(2000);
+                            Thread.Sleep(Helper.threadSleep);
                             personnelReference.Logout();
                         }
                         break;
@@ -273,13 +273,13 @@ namespace Cyphered
                 case ConsoleKey.NumPad6:
                     {
                         Console.WriteLine("Confirm your login details: ");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(Helper.threadSleep);
                         int keyToSave = personnelReference.currentUser.Cipher.Seed;
 
                         if (keyToSave < 0)
                         {
                             Console.WriteLine($"As login was not authenticated, logging out.");
-                            Thread.Sleep(2000);
+                            Thread.Sleep(Helper.threadSleep);
                             personnelReference.Logout();
                         }
 
@@ -289,14 +289,14 @@ namespace Cyphered
                             if (didKeySave.Item1)
                             {
                                 Console.WriteLine($"Key saved successfully to {didKeySave.Item2}.");
-                                Thread.Sleep(2000);
+                                Thread.Sleep(Helper.threadSleep);
                                 currentMenu();
                             }
 
                             else
                             {
                                 Console.WriteLine($"There was a problem, please try again.");
-                                Thread.Sleep(2000);
+                                Thread.Sleep(Helper.threadSleep);
                                 currentMenu();
                             }
                         }
@@ -349,6 +349,14 @@ namespace Cyphered
                         }
                         break;
                     }
+
+                default:
+                    {
+                        Console.WriteLine("Invalid response.");
+                        Thread.Sleep(Helper.threadSleep);
+                        currentMenu();
+                        break;
+                    }
             }
 
         }
@@ -361,7 +369,8 @@ namespace Cyphered
                 t.Stop();
             }
             sender = null;
-            currentMenu();
+            Console.Clear();
+            Console.WriteLine("TIMED OUT: SCREEN CLEARED FOR YOUR SECURITY. PRESS ENTER TO CONTINUE.");
         }
     }
 }

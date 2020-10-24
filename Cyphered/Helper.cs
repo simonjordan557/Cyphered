@@ -8,6 +8,9 @@ namespace Cyphered
 {
     public static class Helper
     {
+        public const int threadSleep = 1000;
+        public const int timeout = 30000;
+
         /// <summary>
         /// Displays a prompt to the user to input a string, then checks the string is valid according to a specified function.
         /// </summary>
@@ -169,7 +172,7 @@ namespace Cyphered
                 default:
                     {
                         Console.WriteLine("Invalid response.");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(threadSleep);
                         return false;
                     }
             }
@@ -198,9 +201,5 @@ namespace Cyphered
             sw.Close();
             return true;
         }
-
-
-        }
-
-
     }
+}

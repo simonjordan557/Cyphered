@@ -109,7 +109,7 @@ namespace Cyphered
             fs.Close();
 
             Console.WriteLine($"New user created and logged in:\n{currentUser}\n");
-            Thread.Sleep(2000);
+            Thread.Sleep(Helper.threadSleep);
             menuReference.SelectKeyMenu();
         }
 
@@ -119,12 +119,12 @@ namespace Cyphered
             if (loginAttempt == null)
             {
                 Console.WriteLine("Login attempt failed.");
-                Thread.Sleep(2000);
+                Thread.Sleep(Helper.threadSleep);
                 menuReference.SelectUserMenu();
             }
             currentUser = loginAttempt;
             Console.WriteLine($"\n{currentUser.UserName} successfully logged in.");
-            Thread.Sleep(2000);
+            Thread.Sleep(Helper.threadSleep);
             menuReference.SelectKeyMenu();
         }
 
