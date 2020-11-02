@@ -10,3 +10,4 @@ L:\Backup 19.1.18\Gamedev\Visual Studio 2019\My Programs\Cyphered\Cyphered\obj\R
 L:\Backup 19.1.18\Gamedev\Visual Studio 2019\My Programs\Cyphered\Cyphered\obj\Release\netcoreapp3.1\Cyphered.dll
 L:\Backup 19.1.18\Gamedev\Visual Studio 2019\My Programs\Cyphered\Cyphered\obj\Release\netcoreapp3.1\Cyphered.pdb
 L:\Backup 19.1.18\Gamedev\Visual Studio 2019\My Programs\Cyphered\Cyphered\obj\Release\netcoreapp3.1\Cyphered.genruntimeconfig.cache
+L:\Backup 19.1.18\Gamedev\Visual Studio 2019\My Programs\Cyphered\Cyphered\obj\Release\netcoreapp3.1\Cyphered.csprojAssemblyReference.cache

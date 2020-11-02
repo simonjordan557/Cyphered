@@ -66,7 +66,7 @@ namespace Cyphered
         /// <returns>Whether the key file is found.</returns>
         public static bool ValidateFilePathAsEncryptedKey(string input)
         {
-            string suffix = @"\seed.txt";
+            string suffix = @"\seed.bin";
             return ValidateFilePath(input, suffix);   
         }
 

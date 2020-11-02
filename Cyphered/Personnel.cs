@@ -29,6 +29,7 @@ namespace Cyphered
             bf = new BinaryFormatter();
         }
 
+        // Decrpts and loads details of all registered users, to check against login.
         public void LoadAllExistingUsers()
         {
             string[] userFilesArray = Directory.GetFiles(usersDirectory, userFileFormat);
@@ -47,7 +48,7 @@ namespace Cyphered
                 fs.Close();
             }
         }
-
+        // Create a new user, if credentials aren't already taken.
         public void CreateAndSaveNewUser()
         {
             string inputUsername;
@@ -99,6 +100,7 @@ namespace Cyphered
             }
             while (inputPassword != confirmInputPassword || inputPassword == "" || inputPassword == null);
 
+            // Add the new user to the list of registered users, and log them in.
             currentUser = new User(inputUsername, inputPassword);
             userList.Add(currentUser);
 
@@ -113,6 +115,7 @@ namespace Cyphered
             menuReference.SelectKeyMenu();
         }
 
+        // Log in, if the input is valid and the credentials match a saved user.
         public void Login()
         {
             loginAttempt = Helper.GetAndValidateLogin(userList);

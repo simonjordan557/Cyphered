@@ -27,7 +27,7 @@ namespace Cyphered
 
         public int Seed
         {
-            get
+            get // Only if user login is validated.
             {
                 List<User> authorisedUserAsList = new List<User> { authorisedUser };
 
@@ -63,6 +63,7 @@ namespace Cyphered
                 alphabetIndex.Remove(randomIndex);
             }
 
+            // Create a mirrored table for decrypting messages previously encrypted with this cypher.
             foreach (KeyValuePair<char, char> entry in encryptMatrix)
             {
                 decryptMatrix.Add(entry.Value, entry.Key);
@@ -113,6 +114,7 @@ namespace Cyphered
         {
             StringBuilder sb = new StringBuilder();
 
+            // Convert letters using substitution table.
             foreach (char c in userInput)
             {
                 if (char.IsLetter(c))
@@ -123,6 +125,7 @@ namespace Cyphered
                 else sb.Append(c);
             }
 
+            // Output result to a text file, and to console.
             userOutput = sb.ToString();
             outputFile = outputDirectory + $"\\encrypt_{encryptCounter}.txt";
             if (Helper.WriteToFile(outputFile, userOutput))
@@ -170,6 +173,7 @@ namespace Cyphered
         {
             StringBuilder sb = new StringBuilder();
 
+            // Convert letters using the substitution table.
             foreach (char c in userInput)
             {
                 if (char.IsLetter(c))
@@ -180,6 +184,7 @@ namespace Cyphered
                 else sb.Append(c);
             }
 
+            // Output result to text file, and to the console.
             userOutput = sb.ToString();
             outputFile = outputDirectory + $"\\decrypt_{decryptCounter}.txt";
             if (Helper.WriteToFile(outputFile, userOutput))

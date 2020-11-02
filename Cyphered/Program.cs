@@ -7,6 +7,7 @@ namespace Cyphered
     {
         static void Main(string[] args)
         {
+            // Create User directory on first run, create all necessary references.
             Personnel personnel;
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\users"))
             {

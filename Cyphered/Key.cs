@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Cyphered
 {
@@ -35,7 +36,7 @@ namespace Cyphered
             if (input == "" || input == null)
             {
                 // Use default path (This has already been checked in the Helper method).
-                filePath = Directory.GetCurrentDirectory() + @"\seed.txt";
+                filePath = Directory.GetCurrentDirectory() + @"\seed.bin";
             }
 
             else
@@ -44,12 +45,15 @@ namespace Cyphered
             }
 
             // Read in data from the file.
-            string rawFile = Helper.ReadFromFile(filePath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Open(filePath, FileMode.Open);
+            EncryptedKey readKey = (EncryptedKey)bf.Deserialize(fs);
+            string rawFile = readKey.keyToEncrypt;
             StringBuilder seedBuilder = new StringBuilder();
-            // Decrypt the data to find the key candidate.
+            // Decrypt the data to find the key candidate. (Garbage for 20 characters, every 21st character is part of the key).
             for (int i = 20; i < rawFile.Length; i += 21)
             {
-                seedBuilder.Append(rawFile[i]);            
+                seedBuilder.Append(rawFile[i]);
             }
             // If the key candidate is validated, return it.
             string seedString = seedBuilder.ToString();
@@ -68,9 +72,11 @@ namespace Cyphered
         public static (bool, string) SaveKeyToFile(int key, string folder)
         {
             Random rng = new Random();
-            string filePath = folder + @"\seed.txt";
+            string filePath = folder + @"\seed.bin";
             string keyString = key.ToString();
             StringBuilder sb = new StringBuilder();
+
+            // Encrypt the key. (Garbage for 20 characters, every 21st character is part of the key).
             for (int i = 0; i < keyString.Length; i++)
             {
                 for (int j = 0; j < 20; j++)
@@ -80,8 +86,23 @@ namespace Cyphered
                 sb.Append(keyString[i]);
             }
             string encryptedKeyString = sb.ToString();
-            ;
-            return (Helper.WriteToFile(filePath, encryptedKeyString), filePath);
+            EncryptedKey encryptedKey = new EncryptedKey(encryptedKeyString);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = File.Open(filePath, FileMode.OpenOrCreate);
+            bf.Serialize(fs, encryptedKey);
+            return (true, filePath);
         }
     }
+
+    [Serializable]
+
+    public class EncryptedKey
+    {
+        public string keyToEncrypt;
+        public EncryptedKey(string input)
+        {
+            keyToEncrypt = input;
+        }
+    }
+        
 }
